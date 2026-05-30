@@ -85,4 +85,14 @@ describe("Book Store", () => {
         await userEvent.click(screen.getByText('X'));
         expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
     });
+    test("Reset basket items empty when clicking clear button", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        const basketItems = screen.getAllByTestId('basket-item')
+        expect(basketItems).toHaveLength(2)
+        await userEvent.click(screen.getByText("Clear"))
+        expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
+    });
 });

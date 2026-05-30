@@ -1,13 +1,18 @@
 import './styles.css'
 import { BOOKS } from './books'
 
-export default function Basket({ basket, removeBook }) {
+export default function Basket({ basket, removeBook, clearBasket }) {
     const booksInBasket = BOOKS.filter((b) => basket.has(b.id))
     return (
         <div className="col-lg-4">
             <div className="basket">
                 <div className="d-flex justify-content-between align-items-center mb-2">
                     <h5 className="mb-0">Your Basket</h5>
+                    {booksInBasket.length > 0 && (
+                        <button className="btn btn-outline-secondary btn-sm" aria-label="Clear basket" onClick={clearBasket}>
+                            Clear
+                        </button>
+                    )}
                 </div>
                 {booksInBasket.length === 0 ? (
                     <p className="text-muted text-center py-3">Your basket is empty</p>

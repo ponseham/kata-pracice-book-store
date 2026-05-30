@@ -23,6 +23,11 @@ export default function App() {
     })
   }
 
+
+  function clearBasket() {
+    setBasket(new Map())
+  }
+
   return (
     <div>
       <div className="header">
@@ -33,7 +38,7 @@ export default function App() {
       <div className="container">
         <div className="row g-4">
           <BookList addBook={addBook} />
-          <Basket basket={basket} removeBook={removeBook} />
+          <Basket basket={basket} removeBook={removeBook} clearBasket={clearBasket} />
         </div>
       </div>
     </div>

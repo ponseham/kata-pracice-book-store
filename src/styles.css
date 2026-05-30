@@ -24,3 +24,18 @@
     object-fit: cover;
     display: block;
 }
+
+.book-info {
+    padding: 8px;
+}
+
+.book-info h6 {
+    margin: 0 0 4px;
+    font-size: 0.85rem;
+}
+
+.book-info p {
+    margin: 0 0 8px;
+    font-size: 0.75rem;
+    color: #6c757d;
+}

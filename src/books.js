@@ -8,3 +8,11 @@ export const BOOKS = [
 ]
 
 export const BOOK_PRICE = 50
+
+export const DISCOUNT_RATES = new Map([
+    [1, 0],
+    [2, 0.05],
+    [3, 0.10],
+    [4, 0.20],
+    [5, 0.25],
+])

@@ -49,3 +49,9 @@
     font-size: 0.82rem;
     color: #555;
 }
+
+.basket {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 16px;
+}

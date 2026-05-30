@@ -1,5 +1,6 @@
 import './styles.css'
 import BookList from './BookList'
+import Basket from './Basket'
 export default function App() {
   return (
     <div>
@@ -9,7 +10,10 @@ export default function App() {
         </div>
       </div>
       <div className="container">
-        <BookList />
+        <div className="row g-4">
+          <BookList />
+          <Basket />
+        </div>
       </div>
     </div>
   )

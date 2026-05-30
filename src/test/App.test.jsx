@@ -31,4 +31,8 @@ describe("Book Store", () => {
         render(<App />)
         expect(screen.getByText(/Mix & Save:/i)).toBeInTheDocument()
     })
+    test('Show basket is empty at the start', () => {
+        render(<App />)
+        expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
+    })
 });

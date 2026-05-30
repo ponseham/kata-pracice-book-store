@@ -3,6 +3,7 @@ import { BOOKS } from './books'
 
 export default function Basket({ basket, removeBook, clearBasket }) {
     const booksInBasket = BOOKS.filter((b) => basket.has(b.id))
+    const price = { subtotal: 50, total: 50 }
     return (
         <div className="col-lg-4">
             <div className="basket">
@@ -35,6 +36,16 @@ export default function Basket({ basket, removeBook, clearBasket }) {
                                 </div>
                             ))
                         }
+                        <hr />
+
+                        <div className="d-flex justify-content-between small text-muted">
+                            <span>Subtotal</span>
+                            <span>{price.subtotal.toFixed(2)} EUR</span>
+                        </div>
+                        <div className="d-flex justify-content-between fw-bold mt-1">
+                            <span>Total</span>
+                            <span>{price.total.toFixed(2)} EUR</span>
+                        </div>
                     </>
                 )}
             </div>

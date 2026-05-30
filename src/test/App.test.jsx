@@ -105,4 +105,13 @@ describe("Book Store", () => {
         expect(buttonsafterClick).toHaveLength(4)
         expect(screen.getByText("+1 (2)")).toBeInTheDocument()
     });
+
+    test("Show price without any discount when selecting single book", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[2])
+        expect(screen.getByText('Subtotal')).toBeInTheDocument()
+        expect(screen.getByText('Total')).toBeInTheDocument()
+        expect(screen.getAllByText('50.00 EUR')).toHaveLength(2)
+    });
 });

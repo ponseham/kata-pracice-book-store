@@ -72,5 +72,17 @@ describe("Book Store", () => {
         await userEvent.click(buttons[2])
         expect(screen.getAllByText('X').length).toBe(2)
     });
-
+    test("When click remove button delete items from basket", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[1])
+        expect(screen.getAllByText('The Clean Coder').length).toBeGreaterThan(1)
+        expect(screen.getByText('×2')).toBeInTheDocument()
+        await userEvent.click(screen.getByText('X'));
+        expect(screen.getByText('×1')).toBeInTheDocument()
+        expect(screen.getAllByText('The Clean Coder').length).toBeGreaterThan(1)
+        await userEvent.click(screen.getByText('X'));
+        expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
+    });
 });

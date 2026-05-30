@@ -1,7 +1,7 @@
 import './styles.css'
 import { BOOKS } from './books'
 
-export default function Basket({ basket }) {
+export default function Basket({ basket, removeBook }) {
     const booksInBasket = BOOKS.filter((b) => basket.has(b.id))
     return (
         <div className="col-lg-4">
@@ -23,6 +23,7 @@ export default function Basket({ basket }) {
                                     <button
                                         className="btn btn-link btn-sm text-danger p-0"
                                         aria-label={`Remove ${book.title}`}
+                                        onClick={() => removeBook(book.id)}
                                     >
                                         X
                                     </button>

@@ -13,6 +13,16 @@ export default function App() {
       return next
     })
   }
+  function removeBook(id) {
+    setBasket((prev) => {
+      const next = new Map(prev)
+      const qty = (next.get(id) ?? 0) - 1
+      if (qty <= 0) next.delete(id)
+      else next.set(id, qty)
+      return next
+    })
+  }
+
   return (
     <div>
       <div className="header">
@@ -23,7 +33,7 @@ export default function App() {
       <div className="container">
         <div className="row g-4">
           <BookList addBook={addBook} />
-          <Basket basket={basket} />
+          <Basket basket={basket} removeBook={removeBook} />
         </div>
       </div>
     </div>

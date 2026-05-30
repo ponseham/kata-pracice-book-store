@@ -27,4 +27,8 @@ describe("Book Store", () => {
         const prices = screen.getAllByText(`${BOOK_PRICE} EUR`)
         expect(prices).toHaveLength(BOOKS.length)
     })
+    test('Show discount related details in footer', () => {
+        render(<App />)
+        expect(screen.getByText(/Mix & Save:/i)).toBeInTheDocument()
+    })
 });

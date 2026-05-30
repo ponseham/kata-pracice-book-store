@@ -39,3 +39,13 @@
     font-size: 0.75rem;
     color: #6c757d;
 }
+
+.discount-info {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 20px;
+    font-size: 0.82rem;
+    color: #555;
+}

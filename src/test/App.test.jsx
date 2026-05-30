@@ -169,4 +169,22 @@ describe("Book Store", () => {
         expect(screen.getByText('187.50 EUR')).toBeInTheDocument();
         expect(screen.getByText('-62.50 EUR')).toBeInTheDocument();
     });
+
+    test("Calculate discount for selecting two sets of books total seven books", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[3])
+        await userEvent.click(buttons[4])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        expect(screen.getByText('Subtotal')).toBeInTheDocument()
+        expect(screen.getByText('Total')).toBeInTheDocument()
+        expect(screen.getByText('Discount')).toBeInTheDocument()
+        expect(screen.getByText('350.00 EUR')).toBeInTheDocument()
+        expect(screen.getByText('282.50 EUR')).toBeInTheDocument();
+        expect(screen.getByText('-67.50 EUR')).toBeInTheDocument();
+    });
 });

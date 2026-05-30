@@ -1,9 +1,10 @@
 import './styles.css'
 import { BOOKS } from './books'
+import { calcPrice } from './utils/priceCalculatetion'
 
 export default function Basket({ basket, removeBook, clearBasket }) {
     const booksInBasket = BOOKS.filter((b) => basket.has(b.id))
-    const price = { subtotal: 50, total: 50 }
+    const price = calcPrice(basket);
     return (
         <div className="col-lg-4">
             <div className="basket">
@@ -42,6 +43,12 @@ export default function Basket({ basket, removeBook, clearBasket }) {
                             <span>Subtotal</span>
                             <span>{price.subtotal.toFixed(2)} EUR</span>
                         </div>
+                        {price.discount > 0 && (
+                            <div className="d-flex justify-content-between small text-success">
+                                <span>Discount</span>
+                                <span>-{price.discount.toFixed(2)} EUR</span>
+                            </div>
+                        )}
                         <div className="d-flex justify-content-between fw-bold mt-1">
                             <span>Total</span>
                             <span>{price.total.toFixed(2)} EUR</span>

@@ -6,6 +6,8 @@ export function calcPrice(basket) {
     let discount = 0;
     if (basket.size === 2)
         discount = 0.05;
+    else if (basket.size === 3)
+        discount = 0.10;
     total = basket.size * BOOK_PRICE * (1 - discount);
     return { subtotal, discount: subtotal - total, total }
 }

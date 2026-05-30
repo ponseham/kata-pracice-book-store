@@ -14,6 +14,12 @@ export default function BookList() {
                             <p>{book.author}</p>
                             <div className="d-flex justify-content-between align-items-center">
                                 <strong>{BOOK_PRICE} EUR</strong>
+                                <button
+                                    className="btn btn-primary btn-sm"
+                                    aria-label={`Add ${book.title} to basket`}
+                                >
+                                    +Add
+                                </button>
                             </div>
                         </div>
                     </div>

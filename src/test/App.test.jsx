@@ -35,4 +35,9 @@ describe("Book Store", () => {
         render(<App />)
         expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
     })
+    test("Showing the Add book to basket button for all books", () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        expect(buttons.length).toBe(5);
+    });
 });

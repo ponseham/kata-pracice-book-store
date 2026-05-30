@@ -1,7 +1,7 @@
 import './styles.css'
 import { BOOKS, BOOK_PRICE } from "./books.js";
 
-export default function BookList({ addBook }) {
+export default function BookList({ addBook, basket }) {
     return (
 
         <div className="col-lg-8">
@@ -19,7 +19,7 @@ export default function BookList({ addBook }) {
                                     aria-label={`Add ${book.title} to basket`}
                                     onClick={() => addBook(book.id)}
                                 >
-                                    +Add
+                                    {basket.get(book.id) ? `+1 (${basket.get(book.id)})` : '+Add'}
                                 </button>
                             </div>
                         </div>

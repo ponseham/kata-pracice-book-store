@@ -39,7 +39,7 @@ export default function App() {
       </div>
       <div className="container">
         <div className="row g-4">
-          <BookList addBook={addBook} />
+          <BookList addBook={addBook} basket={basket} />
           <Basket basket={basket} removeBook={removeBook} clearBasket={clearBasket} />
         </div>
       </div>

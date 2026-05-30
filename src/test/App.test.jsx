@@ -96,12 +96,13 @@ describe("Book Store", () => {
         expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
     });
 
-    test("Show total count of books added in basket", async () => {
+    test("Show slected book count for each book in book info", async () => {
         render(<App />);
         const buttons = screen.getAllByText("+Add");
         await userEvent.click(buttons[2])
-        await userEvent.click(buttons[1])
         await userEvent.click(buttons[2])
-        expect(screen.getByText(/3 items in basket/i)).toBeInTheDocument()
+        const buttonsafterClick = screen.getAllByText("+Add");
+        expect(buttonsafterClick).toHaveLength(4)
+        expect(screen.getByText("+1 (2)")).toBeInTheDocument()
     });
 });

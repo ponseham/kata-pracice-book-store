@@ -65,4 +65,12 @@ describe("Book Store", () => {
         expect(screen.getByText('×2')).toBeInTheDocument()
     });
 
+    test("Show remove button for the basket book items", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        expect(screen.getAllByText('X').length).toBe(2)
+    });
+
 });

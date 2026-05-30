@@ -20,6 +20,12 @@ export default function Basket({ basket }) {
                                         {book.title}
                                         <span className="text-muted ms-1">×{basket.get(book.id)}</span>
                                     </span>
+                                    <button
+                                        className="btn btn-link btn-sm text-danger p-0"
+                                        aria-label={`Remove ${book.title}`}
+                                    >
+                                        X
+                                    </button>
                                 </div>
                             ))
                         }

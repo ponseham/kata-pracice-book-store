@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 export default function App() {
   const [basket, setBasket] = useState(new Map())
+  const totalItems = [...basket.values()].reduce((s, q) => s + q, 0)
 
   function addBook(id) {
     setBasket((prev) => {
@@ -33,6 +34,7 @@ export default function App() {
       <div className="header">
         <div className="container d-flex justify-content-between align-items-center">
           <h1 className="h5 mb-0">Books Store</h1>
+          <span>{totalItems} item{totalItems !== 1 ? 's' : ''} in basket</span>
         </div>
       </div>
       <div className="container">

@@ -140,4 +140,18 @@ describe("Book Store", () => {
         expect(screen.getByText('135.00 EUR')).toBeInTheDocument();
         expect(screen.getByText('-15.00 EUR')).toBeInTheDocument();
     });
+    test("Show price with discount when selecting four different books", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[3])
+        expect(screen.getByText('Subtotal')).toBeInTheDocument()
+        expect(screen.getByText('Total')).toBeInTheDocument()
+        expect(screen.getByText('Discount')).toBeInTheDocument()
+        expect(screen.getByText('200.00 EUR')).toBeInTheDocument()
+        expect(screen.getByText('160.00 EUR')).toBeInTheDocument();
+        expect(screen.getByText('-40.00 EUR')).toBeInTheDocument();
+    });
 });

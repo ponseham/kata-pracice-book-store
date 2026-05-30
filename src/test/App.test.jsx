@@ -55,4 +55,14 @@ describe("Book Store", () => {
             expect(screen.getAllByText(book.title).length).toBeGreaterThan(1)
         })
     });
+
+    test("When add same book multipile times show quantity near book name", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[1])
+        expect(screen.getAllByText('The Clean Coder').length).toBeGreaterThan(1)
+        expect(screen.getByText('×2')).toBeInTheDocument()
+    });
+
 });

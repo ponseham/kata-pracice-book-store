@@ -18,6 +18,7 @@ export default function Basket({ basket }) {
                                 <div key={book.id} className="basket-item" data-testid="basket-item">
                                     <span>
                                         {book.title}
+                                        <span className="text-muted ms-1">×{basket.get(book.id)}</span>
                                     </span>
                                 </div>
                             ))

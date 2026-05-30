@@ -1,7 +1,18 @@
 import './styles.css'
 import BookList from './BookList'
 import Basket from './Basket'
+import { useState } from 'react'
+
 export default function App() {
+  const [basket, setBasket] = useState(new Map())
+
+  function addBook(id) {
+    setBasket((prev) => {
+      const next = new Map(prev)
+      next.set(id, (next.get(id) ?? 0) + 1)
+      return next
+    })
+  }
   return (
     <div>
       <div className="header">
@@ -11,8 +22,8 @@ export default function App() {
       </div>
       <div className="container">
         <div className="row g-4">
-          <BookList />
-          <Basket />
+          <BookList addBook={addBook} />
+          <Basket basket={basket} />
         </div>
       </div>
     </div>

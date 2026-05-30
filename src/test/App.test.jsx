@@ -1,5 +1,6 @@
 import { test, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, act } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../App'
 import { BOOKS, BOOK_PRICE } from '../books';
 
@@ -39,5 +40,19 @@ describe("Book Store", () => {
         render(<App />);
         const buttons = screen.getAllByText("+Add");
         expect(buttons.length).toBe(5);
+    });
+    test("When add book to basket should show books name in basket", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[3])
+        await userEvent.click(buttons[4])
+        const basketItems = screen.getAllByTestId('basket-item')
+        expect(basketItems).toHaveLength(5)
+        BOOKS.forEach(book => {
+            expect(screen.getAllByText(book.title).length).toBeGreaterThan(1)
+        })
     });
 });

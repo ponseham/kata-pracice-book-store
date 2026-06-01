@@ -2,7 +2,7 @@ import { test, expect } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { BOOKS, BOOK_PRICE } from '../books';
+import { BOOKS, BOOK_PRICE, DISCOUNT_RATES } from '../books';
 
 describe("Book Store", () => {
     test('Show book store header', () => {
@@ -95,7 +95,20 @@ describe("Book Store", () => {
         await userEvent.click(screen.getByText("Clear"))
         expect(screen.getByText(/your basket is empty/i)).toBeInTheDocument()
     });
-
+    test("Show total count of books added in basket in header", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        expect(screen.getByText(/3 items in basket/i)).toBeInTheDocument()
+    });
+    test("Show one item in basket in header", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[2])
+        expect(screen.getByText(/1 item in basket/i)).toBeInTheDocument()
+    });
     test("Show slected book count for each book in book info", async () => {
         render(<App />);
         const buttons = screen.getAllByText("+Add");
@@ -204,5 +217,43 @@ describe("Book Store", () => {
         expect(screen.getByText('400.00 EUR')).toBeInTheDocument()
         expect(screen.getByText('320.00 EUR')).toBeInTheDocument();
         expect(screen.getByText('-80.00 EUR')).toBeInTheDocument();
+    });
+
+    test("Calculate discount for selecting different sets of books", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[0])
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        await userEvent.click(buttons[3])
+        await userEvent.click(buttons[4])
+        expect(screen.getByText('Subtotal')).toBeInTheDocument()
+        expect(screen.getByText('Total')).toBeInTheDocument()
+        expect(screen.getByText('Discount')).toBeInTheDocument()
+        expect(screen.getByText('400.00 EUR')).toBeInTheDocument()
+        expect(screen.getByText('320.00 EUR')).toBeInTheDocument();
+        expect(screen.getByText('-80.00 EUR')).toBeInTheDocument();
+    });
+    it("Should not apply discount if no discount rates found", async () => {
+        vi.spyOn(DISCOUNT_RATES, "get")
+            .mockReturnValue(undefined);
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[1])
+        await userEvent.click(buttons[2])
+        expect(screen.getByText('Subtotal')).toBeInTheDocument()
+        expect(screen.getByText('Total')).toBeInTheDocument()
+        expect(screen.getAllByText('100.00 EUR')).toHaveLength(2)
+    });
+
+    test("Handle remove process when no books is there to remove", async () => {
+        render(<App />);
+        const buttons = screen.getAllByText("+Add");
+        await userEvent.click(buttons[1])
+        userEvent.click(screen.getByText('X'));
+        userEvent.click(screen.getByText('X'));
     });
 });

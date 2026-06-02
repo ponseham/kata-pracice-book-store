@@ -12,7 +12,8 @@ export const CSS_CLASSES = {
     SIDEBAR_COLUMN: 'sidebar-column',
     BASKET_HEADER: 'basket-header',
     BASKET: 'basket',
-    EMPTY_MESSAGE: 'empty-message'
+    EMPTY_MESSAGE: 'empty-message',
+    ADD_BOOK_BUTTON: 'add-btn'
 }
 
 export const TEST_ID_BOOK_CARD = 'book-card'
@@ -24,3 +25,5 @@ export const DISCOUNT_INFO_TEXT = '2 Books = 5% off · 3 Books = 10% off · 4 Bo
 
 export const BASKET_SECTION_TITLE = 'Your Basket'
 export const BASKET_EMPTY_MESSAGE = 'Your basket is empty'
+export const ADD_BUTTON_LABEL = '+Add'
+export const ADD_BOOK_TO_BASKET_AREA_LABEL = 'Add _ to basket'

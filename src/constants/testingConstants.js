@@ -36,3 +36,5 @@ export const TEST_DISCOUNT_INFO_TEXT = '2 Books = 5% off · 3 Books = 10% off ·
 
 export const TEST_BASKET_SECTION_TITLE = 'Your Basket'
 export const TEST_BASKET_EMPTY_MESSAGE = 'Your basket is empty'
+export const TEST_ADD_BUTTON_LABEL = '+Add'
+export const TEST_ADD_BOOK_TO_BASKET_AREA_LABEL = 'Add _ to basket'

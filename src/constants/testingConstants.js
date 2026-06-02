@@ -30,3 +30,6 @@ export const TEST_CSS_CLASSES = {
 export const TESTING_TEST_ID_BOOK_CARD = 'book-card'
 
 export const TEST_CURRENCY_LABEL = 'EUR'
+
+export const TEST_MIX_AND_SAVE_TEXT = 'Mix & Save:'
+export const TEST_DISCOUNT_INFO_TEXT = '2 Books = 5% off · 3 Books = 10% off · 4 Books = 20% off · 5 Books = 25% off'

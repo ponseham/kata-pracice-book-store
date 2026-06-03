@@ -1,4 +1,4 @@
-import { EMPTY_COUNT } from '../constants/uiConstants'
+import { EMPTY_COUNT, SINGLE_ITEM_COUNT } from '../constants/uiConstants'
 import { BOOKS } from '../constants/books'
 
 export function selectHasItemsInBasket(state) {
@@ -22,4 +22,14 @@ export function selectBooksInBasket(state) {
         (book) => basketItems[book.id] !== undefined
     )
     return lastResult
+}
+export function selectTotalItemCount(state) {
+    return Object.values(state.basket.basketItems).reduce(
+        (sum, quantity) => sum + quantity,
+        EMPTY_COUNT
+    )
+}
+export function selectHeaderItemLabel(state) {
+    const totalCount = selectTotalItemCount(state)
+    return totalCount === SINGLE_ITEM_COUNT ? 'item' : 'items'
 }

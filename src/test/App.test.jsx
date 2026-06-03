@@ -107,6 +107,14 @@ describe('Book Store', () => {
         await userEvent.click(clearButton)
         expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     });
+    test("Show total count of books added in basket", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([0, 1, 3])
+        expect(screen.getByText('3 ' + TESTING_CONSTANTS.TEST_ITEMS + ' ' + TESTING_CONSTANTS.TEST_IN_BASKET_SUFFIX)).toBeInTheDocument()
+        await userEvent.click(screen.getByText(TESTING_CONSTANTS.TEST_CLEAR_BUTTON_LABEL))
+        await addGivenBooksToBasket([0])
+        expect(screen.getByText('1 ' + TESTING_CONSTANTS.TEST_ITEM + ' ' + TESTING_CONSTANTS.TEST_IN_BASKET_SUFFIX)).toBeInTheDocument()
+    });
 })
 
 

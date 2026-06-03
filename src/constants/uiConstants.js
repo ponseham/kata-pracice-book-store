@@ -36,7 +36,9 @@ export const REMOVE_BUTTON_LABEL = 'X'
 export const REMOVE_BUTTON_AREA_LABEL = 'Remove _'
 export const CLEAR_BUTTON_LABEL = 'Clear'
 export const CLEAR_BASKET_ARIA_LABEL = 'Clear basket'
+export const IN_BASKET_SUFFIX = 'in basket'
 
 export const EMPTY_COUNT = 0
 export const QUANTITY_STEP = 1
 export const INITIAL_QUANTITY = 0
+export const SINGLE_ITEM_COUNT = 1

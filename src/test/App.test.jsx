@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL, TEST_CLEAR_BUTTON_LABEL, TEST_CLEAR_BASKET_ARIA_LABEL } from '../constants/testingConstants'
+import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL, TEST_CLEAR_BUTTON_LABEL, TEST_CLEAR_BASKET_ARIA_LABEL, TEST_IN_BASKET_SUFFIX, TEST_ITEMS, TEST_ITEM } from '../constants/testingConstants'
 import basketReducer from '../store/reducer'
 
 export function renderWithStore() {
@@ -107,6 +107,14 @@ describe('Book Store', () => {
         );
         await userEvent.click(clearButton)
         expect(screen.getByText(TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
+    });
+    test("Show total count of books added in basket", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([0, 1, 3])
+        expect(screen.getByText('3 ' + TEST_ITEMS + ' ' + TEST_IN_BASKET_SUFFIX)).toBeInTheDocument()
+        await userEvent.click(screen.getByText(TEST_CLEAR_BUTTON_LABEL))
+        await addGivenBooksToBasket([0])
+        expect(screen.getByText('1 ' + TEST_ITEM + ' ' + TEST_IN_BASKET_SUFFIX)).toBeInTheDocument()
     });
 })
 

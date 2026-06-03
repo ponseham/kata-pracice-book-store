@@ -130,3 +130,21 @@
 .add-button:hover {
     background: #0b5ed7;
 }
+
+.basket-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.85rem;
+}
+
+.basket-item:last-of-type {
+    border-bottom: none;
+}
+
+.quantity-badge {
+    color: #6c757d;
+    margin-left: 4px;
+}

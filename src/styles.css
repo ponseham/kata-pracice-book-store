@@ -1,0 +1,21 @@
+.header {
+    background: #0d6efd;
+    color: white;
+    padding: 12px 0;
+    margin-bottom: 24px;
+}
+
+.container-row {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-row h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM } from '../constants/testingConstants'
+import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL } from '../constants/testingConstants'
 import basketReducer from '../store/reducer'
 
 export function renderWithStore() {
@@ -17,6 +17,13 @@ export function renderWithStore() {
             <App />
         </Provider>
     )
+}
+
+async function addGivenBooksToBasket(bookIndex = []) {
+    const buttons = screen.getAllByText(TEST_ADD_BUTTON_LABEL)
+    for (const button of bookIndex) {
+        await userEvent.click(buttons[button])
+    }
 }
 
 describe('Book Store', () => {
@@ -74,6 +81,20 @@ describe('Book Store', () => {
         TEST_BOOKS.forEach(book => {
             expect(screen.getAllByText(book.title).length).toBeGreaterThan(1)
         })
+    });
+    test("When click remove button delete items from basket", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([1, 1])
+        expect(screen.getByText('×2')).toBeInTheDocument()
+        const removeButton = screen.getByText(TEST_REMOVE_BUTTON_LABEL)
+        expect(removeButton).toHaveAttribute(
+            'aria-label',
+            TEST_REMOVE_BUTTON_AREA_LABEL.replace('_', TEST_BOOKS[1].title)
+        );
+        await userEvent.click(removeButton);
+        expect(screen.getByText('×1')).toBeInTheDocument()
+        await userEvent.click(removeButton);
+        expect(screen.getByText(TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     });
 })
 

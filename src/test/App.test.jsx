@@ -115,6 +115,13 @@ describe('Book Store', () => {
         await addGivenBooksToBasket([0])
         expect(screen.getByText('1 ' + TESTING_CONSTANTS.TEST_ITEM + ' ' + TESTING_CONSTANTS.TEST_IN_BASKET_SUFFIX)).toBeInTheDocument()
     });
+    test("Show slected book count for each book in book info", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([2, 2])
+        const buttonsafterClick = screen.getAllByText(TESTING_CONSTANTS.TEST_ADD_BUTTON_LABEL);
+        expect(buttonsafterClick).toHaveLength(4)
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_ADD_ONE_MORE_PREFIX + ' (' + 2 + ')')).toBeInTheDocument()
+    });
 })
 
 

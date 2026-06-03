@@ -87,3 +87,32 @@
     font-size: 0.82rem;
     color: #555;
 }
+
+.sidebar-column {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.basket {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.basket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.basket-header h5 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.empty-message {
+    color: #6c757d;
+    text-align: center;
+    padding: 12px 0;
+}

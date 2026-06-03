@@ -95,6 +95,18 @@ describe('Book Store', () => {
         await userEvent.click(removeButton);
         expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     });
+    test("Reset basket items empty when clicking clear button", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([0, 1])
+        const clearButton = screen.getByText(TESTING_CONSTANTS.TEST_CLEAR_BUTTON_LABEL);
+        expect(clearButton).toBeInTheDocument()
+        expect(clearButton).toHaveAttribute(
+            'aria-label',
+            TESTING_CONSTANTS.TEST_CLEAR_BASKET_ARIA_LABEL
+        );
+        await userEvent.click(clearButton)
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
+    });
 })
 
 

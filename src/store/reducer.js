@@ -1,5 +1,5 @@
 import { INITIAL_QUANTITY, QUANTITY_STEP, EMPTY_COUNT } from '../constants/uiConstants'
-import { ADD_BOOK_TO_BASKET, REMOVE_BOOK_FROM_BASKET } from './actions'
+import { ADD_BOOK_TO_BASKET, REMOVE_BOOK_FROM_BASKET, CLEAR_ALL_BOOKS_FROM_BASKET } from './actions'
 const initialState = {
     basketItems: {},
 }
@@ -42,6 +42,11 @@ export default function basketReducer(state = initialState, action) {
                 basketItems: updatedBasket,
             }
         }
+        case CLEAR_ALL_BOOKS_FROM_BASKET:
+            return {
+                ...state,
+                basketItems: {},
+            }
         default:
             return state
     }

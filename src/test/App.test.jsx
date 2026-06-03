@@ -81,6 +81,20 @@ describe('Book Store', () => {
             expect(screen.getAllByText(book.title).length).toBeGreaterThan(1)
         })
     });
+    test("When click remove button delete items from basket", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([1, 1])
+        expect(screen.getByText('×2')).toBeInTheDocument()
+        const removeButton = screen.getByText(TESTING_CONSTANTS.TEST_REMOVE_BUTTON_LABEL)
+        expect(removeButton).toHaveAttribute(
+            'aria-label',
+            TESTING_CONSTANTS.TEST_REMOVE_BUTTON_AREA_LABEL.replace('_', TESTING_CONSTANTS.TEST_BOOKS[1].title)
+        );
+        await userEvent.click(removeButton);
+        expect(screen.getByText('×1')).toBeInTheDocument()
+        await userEvent.click(removeButton);
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
+    });
 })
 
 

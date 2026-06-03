@@ -129,6 +129,14 @@ describe('Book Store', () => {
         expect(screen.getByText(TESTING_CONSTANTS.TEST_TOTAL_LABEL)).toBeInTheDocument()
         expect(screen.getAllByText(TESTING_CONSTANTS.TEST_ONE_BOOK_WITHOUT_DISCOUNT_AMOUNT + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toHaveLength(2)
     });
+    test("Show price with discount when selecting two different books", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([2, 3])
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_DISCOUNT_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_TWO_BOOK_WITH_DISCOUNT_TOTAL + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_TWO_BOOK_WITH_DISCOUNT_SUBTOTAL + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_TWO_BOOK_WITH_DISCOUNT_DISCOUNT + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+    });
 })
 
 

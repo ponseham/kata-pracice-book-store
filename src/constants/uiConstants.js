@@ -20,7 +20,8 @@ export const CSS_CLASSES = {
     CLEAR_BUTTON: 'clear-button',
     BASKET_PRICE_ROW: 'basket-price-row',
     BASKET_PRICE_ROW_TOTAL: 'basket-price-row total',
-    PRICE_AMOUNT: 'price-amount'
+    PRICE_AMOUNT: 'price-amount',
+    BASKET_PRICE_ROW_DISCOUNT: 'basket-price-row discount',
 }
 
 export const TEST_ID_BOOK_CARD = 'book-card'
@@ -50,3 +51,4 @@ export const SINGLE_ITEM_COUNT = 1
 
 export const SUBTOTAL_LABEL = 'Subtotal'
 export const TOTAL_LABEL = 'Total'
+export const DISCOUNT_LABEL = 'Discount'

@@ -185,3 +185,7 @@
 .price-amount {
     font-variant-numeric: tabular-nums;
 }
+
+.basket-price-row.discount {
+    color: #198754;
+}

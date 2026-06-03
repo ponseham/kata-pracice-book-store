@@ -1,5 +1,6 @@
 import { EMPTY_COUNT, SINGLE_ITEM_COUNT } from '../constants/uiConstants'
 import { BOOKS } from '../constants/books'
+import { calculateBasketPrice } from '../utils/priceCalculation'
 
 export function selectHasItemsInBasket(state) {
     return selectBooksInBasket(state).length > EMPTY_COUNT
@@ -32,4 +33,11 @@ export function selectTotalItemCount(state) {
 export function selectHeaderItemLabel(state) {
     const totalCount = selectTotalItemCount(state)
     return totalCount === SINGLE_ITEM_COUNT ? 'item' : 'items'
+}
+export function selectBasketPrice(state) {
+    const basketItems = selectBasketItems(state)
+    const basketAsMap = new Map(
+        Object.entries(basketItems).map(([bookId, quantity]) => [Number(bookId), quantity])
+    )
+    return calculateBasketPrice(basketAsMap)
 }

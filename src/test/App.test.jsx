@@ -30,6 +30,11 @@ describe('Book Store', () => {
         expect(screen.getByText(TESTING_CONSTANTS.TEST_MIX_AND_SAVE_TEXT)).toBeInTheDocument()
         expect(screen.getByText(TESTING_CONSTANTS.TEST_DISCOUNT_INFO_TEXT)).toBeInTheDocument()
     })
+    test('Show basket is empty at the start', () => {
+        render(<App />)
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_SECTION_TITLE)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
+    })
 })
 
 

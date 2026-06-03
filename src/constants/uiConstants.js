@@ -47,7 +47,7 @@ export const EMPTY_COUNT = 0
 export const QUANTITY_STEP = 1
 export const INITIAL_QUANTITY = 0
 export const SINGLE_ITEM_COUNT = 1
-
+export const NO_DISCOUNT = 0
 
 export const SUBTOTAL_LABEL = 'Subtotal'
 export const TOTAL_LABEL = 'Total'

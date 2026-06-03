@@ -35,6 +35,17 @@ describe('Book Store', () => {
         expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_SECTION_TITLE)).toBeInTheDocument()
         expect(screen.getByText(TESTING_CONSTANTS.TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     })
+    test("Show Add book to basket button for all books", () => {
+        render(<App />);
+        const buttons = screen.getAllByText(TESTING_CONSTANTS.TEST_ADD_BUTTON_LABEL);
+        expect(buttons.length).toBe(TESTING_CONSTANTS.TEST_BOOKS.length);
+        TESTING_CONSTANTS.TEST_BOOKS.forEach((book, index) => {
+            expect(buttons[index]).toHaveAttribute(
+                'aria-label',
+                TESTING_CONSTANTS.TEST_ADD_BOOK_TO_BASKET_AREA_LABEL.replace('_', book.title)
+            );
+        })
+    });
 })
 
 

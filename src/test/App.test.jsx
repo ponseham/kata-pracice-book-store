@@ -25,6 +25,11 @@ describe('Book Store', () => {
         const prices = screen.getAllByText(`${TESTING_CONSTANTS.TEST_BOOK_PRICE} ${TESTING_CONSTANTS.TEST_CURRENCY_LABEL}`)
         expect(prices).toHaveLength(TESTING_CONSTANTS.TEST_BOOKS.length)
     })
+    test('Show discount related details in footer', () => {
+        render(<App />)
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_MIX_AND_SAVE_TEXT)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_DISCOUNT_INFO_TEXT)).toBeInTheDocument()
+    })
 })
 
 

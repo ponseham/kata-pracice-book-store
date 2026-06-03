@@ -16,7 +16,8 @@ export const CSS_CLASSES = {
     ADD_BOOK_BUTTON: 'add-btn',
     BASKET_ITEM: 'basket-item',
     QUANTITY_BADGE: 'quantity-badge',
-    REMOVE_BUTTON_AREA: 'remove-button'
+    REMOVE_BUTTON_AREA: 'remove-button',
+    CLEAR_BUTTON: 'clear-button'
 }
 
 export const TEST_ID_BOOK_CARD = 'book-card'
@@ -33,6 +34,8 @@ export const ADD_BUTTON_LABEL = '+Add'
 export const ADD_BOOK_TO_BASKET_AREA_LABEL = 'Add _ to basket'
 export const REMOVE_BUTTON_LABEL = 'X'
 export const REMOVE_BUTTON_AREA_LABEL = 'Remove _'
+export const CLEAR_BUTTON_LABEL = 'Clear'
+export const CLEAR_BASKET_ARIA_LABEL = 'Clear basket'
 
 export const EMPTY_COUNT = 0
 export const QUANTITY_STEP = 1

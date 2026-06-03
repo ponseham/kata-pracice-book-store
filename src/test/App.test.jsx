@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL } from '../constants/testingConstants'
+import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL, TEST_CLEAR_BUTTON_LABEL, TEST_CLEAR_BASKET_ARIA_LABEL } from '../constants/testingConstants'
 import basketReducer from '../store/reducer'
 
 export function renderWithStore() {
@@ -94,6 +94,18 @@ describe('Book Store', () => {
         await userEvent.click(removeButton);
         expect(screen.getByText('×1')).toBeInTheDocument()
         await userEvent.click(removeButton);
+        expect(screen.getByText(TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
+    });
+    test("Reset basket items empty when clicking clear button", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([0, 1])
+        const clearButton = screen.getByText(TEST_CLEAR_BUTTON_LABEL);
+        expect(clearButton).toBeInTheDocument()
+        expect(clearButton).toHaveAttribute(
+            'aria-label',
+            TEST_CLEAR_BASKET_ARIA_LABEL
+        );
+        await userEvent.click(clearButton)
         expect(screen.getByText(TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     });
 })

@@ -1,0 +1,1 @@
+export const TEST_STORE_HEADER_TITLE = 'Books Store'

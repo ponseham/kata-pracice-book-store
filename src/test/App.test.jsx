@@ -122,6 +122,13 @@ describe('Book Store', () => {
         expect(buttonsafterClick).toHaveLength(4)
         expect(screen.getByText(TESTING_CONSTANTS.TEST_ADD_ONE_MORE_PREFIX + ' (' + 2 + ')')).toBeInTheDocument()
     });
+    test("Show price without any discount when selecting single book", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([2])
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_SUBTOTAL_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_TOTAL_LABEL)).toBeInTheDocument()
+        expect(screen.getAllByText(TESTING_CONSTANTS.TEST_ONE_BOOK_WITHOUT_DISCOUNT_AMOUNT + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toHaveLength(2)
+    });
 })
 
 

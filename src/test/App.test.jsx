@@ -137,6 +137,14 @@ describe('Book Store', () => {
         expect(screen.getByText(TESTING_CONSTANTS.TEST_TWO_BOOK_WITH_DISCOUNT_SUBTOTAL + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
         expect(screen.getByText(TESTING_CONSTANTS.TEST_TWO_BOOK_WITH_DISCOUNT_DISCOUNT + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
     });
+    test("Show price with discount when selecting three different books", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([0, 1, 2])
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_DISCOUNT_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_THREE_BOOK_WITH_DISCOUNT_TOTAL + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_THREE_BOOK_WITH_DISCOUNT_SUBTOTAL + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TESTING_CONSTANTS.TEST_THREE_BOOK_WITH_DISCOUNT_DISCOUNT + ' ' + TESTING_CONSTANTS.TEST_CURRENCY_LABEL)).toBeInTheDocument()
+    });
 })
 
 

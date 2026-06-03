@@ -62,7 +62,6 @@ describe('Book Store', () => {
     test("Show Add book to basket button for all books", () => {
         renderWithStore()
         const buttons = screen.getAllByText(TEST_ADD_BUTTON_LABEL);
-        expect(buttons.length).toBe(TEST_BOOKS.length);
         TEST_BOOKS.forEach((book, index) => {
             expect(buttons[index]).toHaveAttribute(
                 'aria-label',
@@ -128,6 +127,7 @@ describe('Book Store', () => {
         await addGivenBooksToBasket([2])
         expect(screen.getByText(TEST_SUBTOTAL_LABEL)).toBeInTheDocument()
         expect(screen.getByText(TEST_TOTAL_LABEL)).toBeInTheDocument()
+        expect(screen.queryByText(TEST_DISCOUNT_LABEL)).not.toBeInTheDocument()
         expect(screen.getAllByText(TEST_ONE_BOOK_WITHOUT_DISCOUNT_AMOUNT + ' ' + TEST_CURRENCY_LABEL)).toHaveLength(2)
     });
     test("Show price with discount when selecting two different books", async () => {

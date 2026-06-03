@@ -1,5 +1,5 @@
 import { BOOK_PRICE, DISCOUNT_RATES } from '../constants/books'
-import { EMPTY_COUNT, NO_DISCOUNT } from '../constants/uiConstants'
+import { EMPTY_COUNT, NO_DISCOUNT, MAXIMUM_BOOK_COUNT_FOR_BEST_DISCOUNT, MINIMUM_BOOK_COUNT_FOR_BEST_DISCOUNT } from '../constants/uiConstants'
 function remainingBooksToGroup(remainingCounts) {
 
     return [...remainingCounts.values()]
@@ -18,9 +18,24 @@ function groupBooksIntoDiscountSets(basketCounts) {
         }
         discountGroups.push(currentGroup)
     }
-    return discountGroups
+    return optimizeGroupsForBestDiscount(discountGroups)
 }
 
+function optimizeGroupsForBestDiscount(discountGroups) {
+    const bigGroup = discountGroups.find(group => group.size === MAXIMUM_BOOK_COUNT_FOR_BEST_DISCOUNT)
+    const smallGroup = discountGroups.find(group => group.size === MINIMUM_BOOK_COUNT_FOR_BEST_DISCOUNT)
+
+    if (!bigGroup || !smallGroup) {
+        return discountGroups
+    }
+
+    const bookToMove = [...bigGroup].find(bookId => !smallGroup.has(bookId))
+
+    bigGroup.delete(bookToMove)
+    smallGroup.add(bookToMove)
+
+    return discountGroups
+}
 
 export function calculateBasketPrice(basketCounts) {
     const discountGroups = groupBooksIntoDiscountSets(basketCounts)

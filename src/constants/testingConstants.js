@@ -28,6 +28,7 @@ export const TEST_CSS_CLASSES = {
 }
 
 export const TESTING_TEST_ID_BOOK_CARD = 'book-card'
+export const TESTING_TEST_ID_BASKET_ITEM = 'basket-item'
 
 export const TEST_CURRENCY_LABEL = 'EUR'
 
@@ -38,3 +39,4 @@ export const TEST_BASKET_SECTION_TITLE = 'Your Basket'
 export const TEST_BASKET_EMPTY_MESSAGE = 'Your basket is empty'
 export const TEST_ADD_BUTTON_LABEL = '+Add'
 export const TEST_ADD_BOOK_TO_BASKET_AREA_LABEL = 'Add _ to basket'
+export const TEST_ADD_BOOK_TO_BASKET = 'ADD_BOOK_TO_BASKET'

@@ -1,16 +1,32 @@
 import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL } from '../constants/testingConstants'
-import { } from '../constants/testingConstants'
+import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM } from '../constants/testingConstants'
+import basketReducer from '../store/reducer'
+
+export function renderWithStore() {
+
+    const rootReducer = combineReducers({
+        basket: basketReducer,
+    })
+    const store = createStore(rootReducer)
+    return render(
+        <Provider store={store}>
+            <App />
+        </Provider>
+    )
+}
 
 describe('Book Store', () => {
     test('Show book store header', () => {
-        render(<App />)
+        renderWithStore()
         expect(screen.getByText(TEST_HEADER.STORE_HEADER_TITLE)).toBeInTheDocument()
     })
 
     test('Show all books information as card', () => {
-        render(<App />)
+        renderWithStore()
         let authorNames = [];
         TEST_BOOKS.forEach(book => {
             const image = screen.getByAltText(book.title)
@@ -27,17 +43,17 @@ describe('Book Store', () => {
         expect(prices).toHaveLength(TEST_BOOKS.length)
     })
     test('Show discount related details in footer', () => {
-        render(<App />)
+        renderWithStore()
         expect(screen.getByText(TEST_MIX_AND_SAVE_TEXT)).toBeInTheDocument()
         expect(screen.getByText(TEST_DISCOUNT_INFO_TEXT)).toBeInTheDocument()
     })
     test('Show basket is empty at the start', () => {
-        render(<App />)
+        renderWithStore()
         expect(screen.getByText(TEST_BASKET_SECTION_TITLE)).toBeInTheDocument()
         expect(screen.getByText(TEST_BASKET_EMPTY_MESSAGE)).toBeInTheDocument()
     })
     test("Show Add book to basket button for all books", () => {
-        render(<App />);
+        renderWithStore()
         const buttons = screen.getAllByText(TEST_ADD_BUTTON_LABEL);
         expect(buttons.length).toBe(TEST_BOOKS.length);
         TEST_BOOKS.forEach((book, index) => {
@@ -45,6 +61,18 @@ describe('Book Store', () => {
                 'aria-label',
                 TEST_ADD_BOOK_TO_BASKET_AREA_LABEL.replace('_', book.title)
             );
+        })
+    });
+    test("Add books to basket and show basket items when click the Add button", async () => {
+        renderWithStore()
+        const buttons = screen.getAllByText(TEST_ADD_BUTTON_LABEL)
+        for (const button of buttons) {
+            await userEvent.click(button)
+        }
+        const basketItems = screen.getAllByTestId(TESTING_TEST_ID_BASKET_ITEM)
+        expect(basketItems).toHaveLength(TEST_BOOKS.length)
+        TEST_BOOKS.forEach(book => {
+            expect(screen.getAllByText(book.title).length).toBeGreaterThan(1)
         })
     });
 })

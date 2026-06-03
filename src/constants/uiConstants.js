@@ -13,10 +13,13 @@ export const CSS_CLASSES = {
     BASKET_HEADER: 'basket-header',
     BASKET: 'basket',
     EMPTY_MESSAGE: 'empty-message',
-    ADD_BOOK_BUTTON: 'add-btn'
+    ADD_BOOK_BUTTON: 'add-btn',
+    BASKET_ITEM: 'basket-item',
+    QUANTITY_BADGE: 'quantity-badge'
 }
 
 export const TEST_ID_BOOK_CARD = 'book-card'
+export const TEST_ID_BASKET_ITEM = 'basket-item'
 
 export const CURRENCY_LABEL = 'EUR'
 
@@ -27,3 +30,7 @@ export const BASKET_SECTION_TITLE = 'Your Basket'
 export const BASKET_EMPTY_MESSAGE = 'Your basket is empty'
 export const ADD_BUTTON_LABEL = '+Add'
 export const ADD_BOOK_TO_BASKET_AREA_LABEL = 'Add _ to basket'
+
+export const EMPTY_COUNT = 0
+export const QUANTITY_STEP = 1
+export const INITIAL_QUANTITY = 0

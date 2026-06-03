@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
-import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL, TEST_CLEAR_BUTTON_LABEL, TEST_CLEAR_BASKET_ARIA_LABEL, TEST_IN_BASKET_SUFFIX, TEST_ITEMS, TEST_ITEM, TEST_ADD_ONE_MORE_PREFIX } from '../constants/testingConstants'
+import { TEST_BOOKS, TEST_HEADER, TEST_BOOK_PRICE, TEST_CURRENCY_LABEL, TEST_MIX_AND_SAVE_TEXT, TEST_DISCOUNT_INFO_TEXT, TEST_BASKET_SECTION_TITLE, TEST_BASKET_EMPTY_MESSAGE, TEST_ADD_BUTTON_LABEL, TEST_ADD_BOOK_TO_BASKET_AREA_LABEL, TESTING_TEST_ID_BASKET_ITEM, TEST_REMOVE_BUTTON_LABEL, TEST_REMOVE_BUTTON_AREA_LABEL, TEST_CLEAR_BUTTON_LABEL, TEST_CLEAR_BASKET_ARIA_LABEL, TEST_IN_BASKET_SUFFIX, TEST_ITEMS, TEST_ITEM, TEST_ADD_ONE_MORE_PREFIX, TEST_SUBTOTAL_LABEL, TEST_TOTAL_LABEL, TEST_ONE_BOOK_WITHOUT_DISCOUNT_AMOUNT, TEST_DISCOUNT_LABEL, TEST_TWO_BOOK_WITH_DISCOUNT_TOTAL, TEST_TWO_BOOK_WITH_DISCOUNT_SUBTOTAL, TEST_TWO_BOOK_WITH_DISCOUNT_DISCOUNT } from '../constants/testingConstants'
 import basketReducer from '../store/reducer'
 
 export function renderWithStore() {
@@ -122,6 +122,21 @@ describe('Book Store', () => {
         const buttonsafterClick = screen.getAllByText(TEST_ADD_BUTTON_LABEL);
         expect(buttonsafterClick).toHaveLength(4)
         expect(screen.getByText(TEST_ADD_ONE_MORE_PREFIX + ' (' + 2 + ')')).toBeInTheDocument()
+    });
+    test("Show price without any discount when selecting single book", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([2])
+        expect(screen.getByText(TEST_SUBTOTAL_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TEST_TOTAL_LABEL)).toBeInTheDocument()
+        expect(screen.getAllByText(TEST_ONE_BOOK_WITHOUT_DISCOUNT_AMOUNT + ' ' + TEST_CURRENCY_LABEL)).toHaveLength(2)
+    });
+    test("Show price with discount when selecting two different books", async () => {
+        renderWithStore()
+        await addGivenBooksToBasket([2, 3])
+        expect(screen.getByText(TEST_DISCOUNT_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TEST_TWO_BOOK_WITH_DISCOUNT_TOTAL + ' ' + TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TEST_TWO_BOOK_WITH_DISCOUNT_SUBTOTAL + ' ' + TEST_CURRENCY_LABEL)).toBeInTheDocument()
+        expect(screen.getByText(TEST_TWO_BOOK_WITH_DISCOUNT_DISCOUNT + ' ' + TEST_CURRENCY_LABEL)).toBeInTheDocument()
     });
 })
 

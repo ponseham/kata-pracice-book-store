@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import BasketItem from './BasketItem'
+import BasketSummary from './BasketSummary'
 import {
     BASKET_SECTION_TITLE,
     BASKET_EMPTY_MESSAGE,
@@ -40,6 +41,7 @@ export default function Basket() {
                         {booksInBasket.map((book) => (
                             <BasketItem key={book.id} book={book} />
                         ))}
+                        <BasketSummary />
                     </>
                 ) : (
                     <p className={CSS_CLASSES.EMPTY_MESSAGE}>{BASKET_EMPTY_MESSAGE}</p>

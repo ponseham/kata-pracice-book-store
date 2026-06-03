@@ -17,7 +17,11 @@ export const CSS_CLASSES = {
     BASKET_ITEM: 'basket-item',
     QUANTITY_BADGE: 'quantity-badge',
     REMOVE_BUTTON_AREA: 'remove-button',
-    CLEAR_BUTTON: 'clear-button'
+    CLEAR_BUTTON: 'clear-button',
+    BASKET_PRICE_ROW: 'basket-price-row',
+    BASKET_PRICE_ROW_TOTAL: 'basket-price-row total',
+    PRICE_AMOUNT: 'price-amount',
+    BASKET_PRICE_ROW_DISCOUNT: 'basket-price-row discount',
 }
 
 export const TEST_ID_BOOK_CARD = 'book-card'
@@ -43,3 +47,8 @@ export const EMPTY_COUNT = 0
 export const QUANTITY_STEP = 1
 export const INITIAL_QUANTITY = 0
 export const SINGLE_ITEM_COUNT = 1
+
+
+export const SUBTOTAL_LABEL = 'Subtotal'
+export const TOTAL_LABEL = 'Total'
+export const DISCOUNT_LABEL = 'Discount'
